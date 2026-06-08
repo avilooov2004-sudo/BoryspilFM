@@ -1,154 +1,186 @@
 <!DOCTYPE html>
-
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BoryspilFM - Онлайн радіо Борисполя</title>
+<title>BoryspilFM - Онлайн радіо твого міста</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
+body {
     font-family: Arial, sans-serif;
 
+    /* Тут потім можна поставити свій фон */
     background-image: url('background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    min-height:100vh;
+    min-height: 100vh;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
 }
 
-.overlay{
-    background:rgba(0,0,0,0.65);
-    padding:40px;
-    border-radius:25px;
-    text-align:center;
-    color:white;
-    width:90%;
-    max-width:600px;
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.75), rgba(0,30,60,0.75));
+    z-index: -1;
 }
 
-.logo{
-    width:120px;
-    margin-bottom:20px;
+.card {
+    background: rgba(0, 0, 0, 0.65);
+    padding: 40px 30px;
+    border-radius: 28px;
+    text-align: center;
+    width: 90%;
+    max-width: 560px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    backdrop-filter: blur(8px);
 }
 
-h1{
-    font-size:48px;
-    margin-bottom:10px;
+.plane {
+    font-size: 90px;
+    margin-bottom: 10px;
 }
 
-.subtitle{
-    font-size:18px;
-    opacity:0.9;
-    margin-bottom:30px;
+h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
 }
 
-button{
-    background:#FFD700;
-    color:#000;
-    border:none;
-    padding:18px 40px;
-    border-radius:50px;
-    font-size:22px;
-    cursor:pointer;
-    font-weight:bold;
+.subtitle {
+    font-size: 20px;
+    opacity: 0.9;
+    margin-bottom: 30px;
 }
 
-button:hover{
-    transform:scale(1.05);
+.player-button {
+    background: #FFD700;
+    color: #111;
+    border: none;
+    padding: 18px 42px;
+    border-radius: 50px;
+    font-size: 22px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
 }
 
-.status{
-    margin-top:20px;
-    font-size:16px;
+.player-button:hover {
+    transform: scale(1.05);
+    background: #ffbd00;
 }
 
-footer{
-    margin-top:30px;
-    opacity:0.7;
-    font-size:14px;
+.status {
+    margin-top: 22px;
+    font-size: 17px;
+    opacity: 0.9;
 }
 
+.info {
+    margin-top: 25px;
+    font-size: 15px;
+    opacity: 0.75;
+    line-height: 1.5;
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 14px;
+    opacity: 0.65;
+}
+
+@media (max-width: 600px) {
+    .card {
+        padding: 30px 20px;
+    }
+
+    .plane {
+        font-size: 70px;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+
+    .player-button {
+        font-size: 19px;
+        padding: 16px 30px;
+    }
+}
 </style>
-
 </head>
 
 <body>
 
-<div class="overlay">
+<div class="card">
 
-```
-<!-- Логотип -->
-<img src="logo.png" class="logo" alt="BoryspilFM">
+    <!-- Літачок замість мікрофона -->
+    <div class="plane">✈️</div>
 
-<h1>🎙 BoryspilFM</h1>
+    <h1>BoryspilFM</h1>
 
-<div class="subtitle">
-    Онлайн радіо Борисполя
-</div>
+    <div class="subtitle">
+        Онлайн радіо твого міста
+    </div>
 
-<audio id="radio"
-src="ТУТ_БУДЕ_ПОСИЛАННЯ_НА_ПОТІК">
-</audio>
+    <!-- Тут потім вставиш посилання на потік -->
+    <audio id="radio" src="ТУТ_БУДЕ_ПОСИЛАННЯ_НА_ПОТІК"></audio>
 
-<button onclick="toggleRadio()">
-    ▶ Слухати ефір
-</button>
+    <button class="player-button" onclick="toggleRadio()">
+        ▶ Слухати ефір
+    </button>
 
-<div class="status" id="status">
-    Готово до відтворення
-</div>
+    <div class="status" id="status">
+        Готово до відтворення
+    </div>
 
-<footer>
-    © BoryspilFM
-</footer>
-```
+    <div class="info">
+        Прямий ефір міського радіо онлайн.<br>
+        Новини, музика та події твого міста.
+    </div>
+
+    <footer>
+        © BoryspilFM
+    </footer>
 
 </div>
 
 <script>
-
 const radio = document.getElementById('radio');
 const statusText = document.getElementById('status');
-const button = document.querySelector('button');
+const button = document.querySelector('.player-button');
 
-function toggleRadio(){
-
-    if(radio.paused){
-
+function toggleRadio() {
+    if (radio.paused) {
         radio.play();
 
-        button.innerHTML =
-        "⏸ Зупинити ефір";
-
-        statusText.innerHTML =
-        "🔴 Прямий ефір";
-
-    }else{
-
+        button.innerHTML = "⏸ Зупинити ефір";
+        statusText.innerHTML = "🔴 Прямий ефір";
+    } else {
         radio.pause();
 
-        button.innerHTML =
-        "▶ Слухати ефір";
-
-        statusText.innerHTML =
-        "⏹ Ефір зупинено";
+        button.innerHTML = "▶ Слухати ефір";
+        statusText.innerHTML = "⏹ Ефір зупинено";
     }
 }
-
 </script>
 
 </body>
