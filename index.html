@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BoryspilFM - Онлайн радіо Борисполя</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.overlay{
+    background:rgba(0,0,0,0.65);
+    padding:40px;
+    border-radius:25px;
+    text-align:center;
+    color:white;
+    width:90%;
+    max-width:600px;
+}
+
+.logo{
+    width:120px;
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    font-size:18px;
+    opacity:0.9;
+    margin-bottom:30px;
+}
+
+button{
+    background:#FFD700;
+    color:#000;
+    border:none;
+    padding:18px 40px;
+    border-radius:50px;
+    font-size:22px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.status{
+    margin-top:20px;
+    font-size:16px;
+}
+
+footer{
+    margin-top:30px;
+    opacity:0.7;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="overlay">
+
+```
+<!-- Логотип -->
+<img src="logo.png" class="logo" alt="BoryspilFM">
+
+<h1>🎙 BoryspilFM</h1>
+
+<div class="subtitle">
+    Онлайн радіо Борисполя
+</div>
+
+<audio id="radio"
+src="ТУТ_БУДЕ_ПОСИЛАННЯ_НА_ПОТІК">
+</audio>
+
+<button onclick="toggleRadio()">
+    ▶ Слухати ефір
+</button>
+
+<div class="status" id="status">
+    Готово до відтворення
+</div>
+
+<footer>
+    © BoryspilFM
+</footer>
+```
+
+</div>
+
+<script>
+
+const radio = document.getElementById('radio');
+const statusText = document.getElementById('status');
+const button = document.querySelector('button');
+
+function toggleRadio(){
+
+    if(radio.paused){
+
+        radio.play();
+
+        button.innerHTML =
+        "⏸ Зупинити ефір";
+
+        statusText.innerHTML =
+        "🔴 Прямий ефір";
+
+    }else{
+
+        radio.pause();
+
+        button.innerHTML =
+        "▶ Слухати ефір";
+
+        statusText.innerHTML =
+        "⏹ Ефір зупинено";
+    }
+}
+
+</script>
+
+</body>
+</html>
